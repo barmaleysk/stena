@@ -24,6 +24,11 @@ class OtherwiseController extends TelegramBaseController {
 
     }
 }
+class CallbackQueryController extends TelegramBaseCallbackQueryController {
+    handle($) {
+        if ($._data == 'next_step') {  tg.api.sendPhoto($._userId,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt) }
+    }
+}
 class FeedBackController extends TelegramBaseController {
     feedback($) { lib.feed_back($); analytic.add('Обратная связь', $); $.sendMessage(data.link_text) }
     get routes() { return { 'FeedBack': 'feedback' } }

@@ -35,10 +35,10 @@ module.exports.varClOpt= {
 
 module.exports.procClOpt= {
   reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "6_1" }]]
+    "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "next_step" }]]
   }),
   parse_mode: "HTML",
-  caption: "<b>Процесс оклейки</b>\n\nШаг 1\nМойка кузова и обезжиривание спец.оборудованием"
+  caption: "<b>Процесс оклейки</b>\n\nШаг 1\n\nМойка кузова и обезжиривание спец.оборудованием"
 };
 
 module.exports.company = 'О компании'

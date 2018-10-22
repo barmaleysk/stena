@@ -18,8 +18,8 @@ class OtherwiseController extends TelegramBaseController {
             )
         }
         if ($._message._photo) {//<-----------
-            console.log($)
-            tg.api.sendPhoto($.user_id, 'AgADAgADhakxGwM5cEp_2ucxVK2aK2bMtw4ABAenTc5CODPNIYEFAAEC')
+            console.log($._userId)
+            tg.api.sendPhoto($._userId, 'AgADAgADhakxGwM5cEp_2ucxVK2aK2bMtw4ABAenTc5CODPNIYEFAAEC')
         }
 
     }

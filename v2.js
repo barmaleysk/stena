@@ -145,7 +145,7 @@ class ProcCl extends TelegramBaseController {
 class Contact extends TelegramBaseController {
     qContact($) { 
         //analytic.add('Процесс оклейки', $); 
-        $.sendMessage(data.contac, data.contactOpt)
+        $.sendMessage(data.contact, data.contactOpt)
     }
     get routes() { return { 'contact': 'qContact' } }
 }

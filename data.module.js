@@ -37,12 +37,13 @@ module.exports.procClOpt= {
   reply_markup: JSON.stringify({
     "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "6_1" }]]
   }),
-  parse_mode: "HTML"
+  parse_mode: "HTML",
+  caption: "<b>Процесс оклейки</b>\n\nШаг 1\nМойка кузова и обезжиривание спец.оборудованием"
 };
 
 module.exports.company = 'О компании'
 module.exports.varCl = 'Варианты оклейки'
-module.exports.procCl = '<b>Процесс оклейки</b>\n\nШаг 1\nМойка кузова и обезжиривание спец.оборудованием'
+//module.exports.procCl = '<b>Процесс оклейки</b>\n\nШаг 1\nМойка кузова и обезжиривание спец.оборудованием'
 module.exports.start_text = '<b>Оклейка авто в Воронеже</b>\n\nВыделяемся из толпы правильно';
 module.exports.opt = {
   reply_markup: JSON.stringify({

@@ -19,7 +19,7 @@ class OtherwiseController extends TelegramBaseController {
         }
         if ($._message._photo) {//<-----------
             console.log($._message._photo)
-            tg.api.sendPhoto($._userId,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',{ caption: "rerer", parse_mode: "HTML" })
+            
         }
 
     }
@@ -136,7 +136,7 @@ class VarCl extends TelegramBaseController {
 class ProcCl extends TelegramBaseController {
     qProcCl($) { 
         //analytic.add('Процесс оклейки', $); 
-        $.sendMessage(data.procCl, data.procClOpt)
+        tg.api.sendPhoto($._userId,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',procClOpt)
     }
     get routes() { return { 'procCl': 'qProcCl' } }
 }

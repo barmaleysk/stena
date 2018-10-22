@@ -161,3 +161,4 @@ tg.router
     .when(new TextCommand('Бесплатная консультация', 'startCommand'), new StartController())
     .when(new TextCommand('Контакты', 'contact'), new Contact())
     .when(new TextCommand('Оставить заявку', 'startCommand'), new StartController())
+    .otherwise(new OtherwiseController())

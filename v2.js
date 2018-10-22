@@ -18,10 +18,11 @@ class OtherwiseController extends TelegramBaseController {
             )
         }
         if ($._message._photo) {//<-----------
-            lib.add_photo($,
-                (result) => $.sendMessage(result.text, result.opt),
-                (result) => $.sendPhoto(result.file, result.opt),
-            )
+            console.log($._message._photo)
+            //lib.add_photo($,
+            //    (result) => $.sendMessage(result.text, result.opt),
+            //    (result) => $.sendPhoto(result.file, result.opt),
+           // )
         }
 
     }

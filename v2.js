@@ -26,7 +26,7 @@ class OtherwiseController extends TelegramBaseController {
 }
 class CallbackQueryController extends TelegramBaseCallbackQueryController {
     handle($) {
-        if ($._data == 'next_step') {  tg.api.sendPhoto($._userId,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt) }
+        if ($._data == 'next_step') {  tg.api.sendPhoto($._from._id,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt) }
     }
 }
 class FeedBackController extends TelegramBaseController {

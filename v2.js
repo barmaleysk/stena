@@ -24,7 +24,7 @@ class OtherwiseController extends TelegramBaseController {
                 (result) => $.sendPhoto(result.file, result.opt),
             )
         }
-        
+
     }
 }
 
@@ -39,11 +39,7 @@ class FeedBackController extends TelegramBaseController {
 }
 class StartController extends TelegramBaseController {
     startHandler($) {
-       // if ($.message.text.slice(0, 6) == '/start' && $.message.text.length > 10) {
-       //    analytic.add('/referal', $); lib.new_referal($, () => { })
-       // }
-       // analytic.add('/start', $);
-        $.sendMessage(data.start_text, data.opt)
+        $.sendMessage("привет")
     }
     get routes() { return { 'startCommand': 'startHandler' } }
 }

@@ -129,14 +129,14 @@ class SaleController extends TelegramBaseController {
 }
 class Company extends TelegramBaseController {
     qCompany($) { 
-        analytic.add('О компании', $); 
+        //analytic.add('О компании', $); 
         $.sendMessage(r.text, r.opt)
     }
     get routes() { return { 'company': 'qCompany' } }
 }
 class VarCl extends TelegramBaseController {
     qVarCl($) { 
-        analytic.add('Варианты оклейки', $); 
+        //analytic.add('Варианты оклейки', $); 
         $.sendMessage(data.varCl, data.varClOpt);
         console.log('d')
     }
@@ -144,7 +144,7 @@ class VarCl extends TelegramBaseController {
 }
 class ProcCl extends TelegramBaseController {
     qProcCl($) { 
-        analytic.add('Процесс оклейки', $); 
+        //analytic.add('Процесс оклейки', $); 
         $.sendMessage(r.text, r.opt)
     }
     get routes() { return { 'procCl': 'qProcCl' } }

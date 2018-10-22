@@ -5,7 +5,6 @@ const data = require('./data.module');
 //const analytic = require('./analytics/analytics');
 const Telegram = require('telegram-node-bot')
 const TelegramBaseController = Telegram.TelegramBaseController
-const TelegramBaseInlineQueryController = Telegram.TelegramBaseInlineQueryController
 const TelegramBaseCallbackQueryController = Telegram.TelegramBaseCallbackQueryController
 const TextCommand = Telegram.TextCommand
 const tg = new Telegram.Telegram(data.token, { workers: 1 })
@@ -25,12 +24,6 @@ class OtherwiseController extends TelegramBaseController {
             )
         }
 
-    }
-}
-
-class InlineModeController extends TelegramBaseInlineQueryController {
-    handle($) {
-        lib.inlinecom($.inlineQuery.query, (result) => { tg.api.answerInlineQuery($.inlineQuery.id, result, { cache_time: 0 }) })
     }
 }
 class FeedBackController extends TelegramBaseController {
@@ -127,10 +120,11 @@ class SaleController extends TelegramBaseController {
     }
     get routes() { return { 'sale_com': 'saleFun' } }
 }
+
 class Company extends TelegramBaseController {
     qCompany($) { 
         //analytic.add('О компании', $); 
-        $.sendMessage(data,company)
+        $.sendMessage(data.company)
     }
     get routes() { return { 'company': 'qCompany' } }
 }
@@ -148,6 +142,13 @@ class ProcCl extends TelegramBaseController {
     }
     get routes() { return { 'procCl': 'qProcCl' } }
 }
+class Contact extends TelegramBaseController {
+    qProcCl($) { 
+        //analytic.add('Процесс оклейки', $); 
+        $.sendMessage(data.contac, data.contactOpt)
+    }
+    get routes() { return { 'contact': 'qContact' } }
+}
 
 
 tg.router
@@ -157,5 +158,5 @@ tg.router
     .when(new TextCommand('Процесс оклейки', 'procCl'), new ProcCl())
     .when(new TextCommand('Отвечаем на вопросы', 'startCommand'), new StartController())
     .when(new TextCommand('Бесплатная консультация', 'startCommand'), new StartController())
-    .when(new TextCommand('Контакты', 'startCommand'), new StartController())
+    .when(new TextCommand('Контакты', 'contact'), new Contact())
     .when(new TextCommand('Оставить заявку', 'startCommand'), new StartController())

@@ -36,12 +36,13 @@ module.exports.varClOpt= {
 module.exports.procClOpt= {
   reply_markup: JSON.stringify({
     "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "6_1" }]]
-  })
+  }),
+  parse_mode: "HTML"
 };
 
 module.exports.company = 'О компании'
 module.exports.varCl = 'Варианты оклейки'
-module.exports.procCl = 'Процесс оклейки \nШаг 1\n Мойка кузова и обезжиривание спец.оборудованием'
+module.exports.procCl = '<b>Процесс оклейки</b>\n\nШаг 1\nМойка кузова и обезжиривание спец.оборудованием'
 module.exports.start_text = '<b>Оклейка авто в Воронеже</b>\n\nВыделяемся из толпы правильно';
 module.exports.opt = {
   reply_markup: JSON.stringify({
@@ -50,7 +51,10 @@ module.exports.opt = {
   }),
   parse_mode: "HTML"
 };
-
+module.exports.contactOpt = {
+  parse_mode: "HTML"
+};
+module.exports.contact = '<b>Контакты</b>\n\nТелефон: +7 930 400-77-08\nВКонтакте: vk.com/okleika.avto\nInstagram: inatagram.com/okleika.avto\n\nАдрес:\nг.Воронеж\nул. Проспект труда, д.46в\n"Детейлинг центр Restore FX"\n\nРеквизиты организации:\nИП Сергеев Дмитрий Юрьевич\nИНН 366107118235'
 
 // module.exports.link_bot = 'https://t.me/SaleFinderBot?start=';
 // module.exports.admin_root_id = 329182039;

@@ -62,12 +62,16 @@ module.exports.set_type_size = {
     ]
   })
 };
-module.exports.opts_set_6 = {
+module.exports.varClOpt= {
   reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": "За неделю", "callback_data": "6_1" }],
-    [{ "text": "За месяц", "callback_data": "6_2" }],
-    [{ "text": "За весь период", "callback_data": "6_3" }],
-    [{ "text": "⬅️ Назад", "callback_data": "5_back" }]]
+    "inline_keyboard": [[{ "text": "Антигравийная", "callback_data": "6_1" }],
+    [{ "text": "Тонирование", "callback_data": "6_2" }],
+    [{ "text": "Матовая", "callback_data": "6_3" }],
+    [{ "text": "Хром/Золото", "callback_data": "6_3" }],
+    [{ "text": "Винилография", "callback_data": "6_3" }],
+    [{ "text": "Камуфляж", "callback_data": "6_3" }],
+    [{ "text": "Брендирование", "callback_data": "6_3" }],
+    [{ "text": "Глянцевая", "callback_data": "5_back" }]]
   })
 };
 module.exports.opts_set_1 = {
@@ -101,7 +105,7 @@ module.exports.opts_set_3 = {
   })
 };
 
-
+module.exports.varCl = 'Варианты оклейки'
 module.exports.start_text = '<b>Оклейка авто в Воронеже</b>\n\nВыделяемся из толпы правильно';
 module.exports.opt = {
   reply_markup: JSON.stringify({

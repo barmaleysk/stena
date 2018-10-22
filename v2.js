@@ -127,17 +127,34 @@ class SaleController extends TelegramBaseController {
     }
     get routes() { return { 'sale_com': 'saleFun' } }
 }
-class NewPostController extends TelegramBaseController {
-    newPostFun($) { analytic.add('Новый пост', $); lib.NewPost($, (r) => { $.sendMessage(r.text, r.opt) }) }
-    get routes() { return { 'new_post_com': 'newPostFun' } }
+class Company extends TelegramBaseController {
+    qCompany($) { 
+        analytic.add('О компании', $); 
+        $.sendMessage(r.text, r.opt)
+    }
+    get routes() { return { 'company': 'qCompany' } }
+}
+class VarCl extends TelegramBaseController {
+    qVarCl($) { 
+        analytic.add('Варианты оклейки', $); 
+        $.sendMessage(data.varCl, data.varClOpt)
+    }
+    get routes() { return { 'varCl': 'qVarCl' } }
+}
+class ProcCl extends TelegramBaseController {
+    qProcCl($) { 
+        analytic.add('Процесс оклейки', $); 
+        $.sendMessage(r.text, r.opt)
+    }
+    get routes() { return { 'procCl': 'qProcCl' } }
 }
 
 
 tg.router
     .when(new TextCommand('/start', 'startCommand'), new StartController())
-    .when(new TextCommand('О компании', 'startCommand'), new StartController())
-    .when(new TextCommand('Варианты оклейки', 'startCommand'), new StartController())
-    .when(new TextCommand('Процесс оклейки', 'startCommand'), new StartController())
+    .when(new TextCommand('О компании', 'company'), new Company())
+    .when(new TextCommand('Варианты оклейки', 'varCl'), new VarCl())
+    .when(new TextCommand('Процесс оклейки', 'procCl'), new ProcCl())
     .when(new TextCommand('Отвечаем на вопросы', 'startCommand'), new StartController())
     .when(new TextCommand('Бесплатная консультация', 'startCommand'), new StartController())
     .when(new TextCommand('Контакты', 'startCommand'), new StartController())

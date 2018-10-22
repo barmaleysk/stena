@@ -35,10 +35,29 @@ module.exports.varClOpt= {
 
 module.exports.procClOpt= {
   reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "next_step" }]]
+    "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "next_step_1" }]]
   }),
   parse_mode: "HTML",
   caption: "<b>Процесс оклейки</b>\n\nШаг 1\n\nМойка кузова и обезжиривание спец.оборудованием"
+};
+
+module.exports.procClOpt_1= {
+  reply_markup: JSON.stringify({
+    "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "next_step_2" }]]
+  }),
+  parse_mode: "HTML",
+  caption: "<b>Процесс оклейки</b>\n\nШаг 2\n\nМойка кузова и обезжиривание спец.оборудованием"
+};
+module.exports.procClOpt_2= {
+  reply_markup: JSON.stringify({
+    "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "next_step_3" }]]
+  }),
+  parse_mode: "HTML",
+  caption: "<b>Процесс оклейки</b>\n\nШаг 3\n\nМойка кузова и обезжиривание спец.оборудованием"
+};
+module.exports.procClOpt_3= {
+  parse_mode: "HTML",
+  caption: "<b>Процесс оклейки</b>\n\nШаг 4\n\nМойка кузова и обезжиривание спец.оборудованием"
 };
 
 module.exports.company = 'О компании'

@@ -27,6 +27,9 @@ class OtherwiseController extends TelegramBaseController {
 class CallbackQueryController extends TelegramBaseCallbackQueryController {
     handle($) {
         if ($._data == 'next_step') {  tg.api.sendPhoto($._from._id,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt) }
+        if ($._data == 'next_step_1') {  tg.api.sendPhoto($._from._id,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt_1) }
+        if ($._data == 'next_step_2') {  tg.api.sendPhoto($._from._id,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt_2) }
+        if ($._data == 'next_step_3') {  tg.api.sendPhoto($._from._id,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt_3) }
     }
 }
 class FeedBackController extends TelegramBaseController {

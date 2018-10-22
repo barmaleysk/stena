@@ -20,48 +20,6 @@ module.exports.opts_set_5 = {
   }),
   parse_mode: "HTML"
 };
-module.exports.det_stat = {
-  reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": "Детальная статистика", "callback_data": "det_stat" }]]
-  }),
-  parse_mode: "HTML"
-};
-
-module.exports.opt = {
-  reply_markup: JSON.stringify({
-    keyboard: [['Настройка рассылки', 'Реферальная программа'], ['Обратная связь', 'Премиум скидки']],
-    resize_keyboard: true
-  }),
-  parse_mode: "HTML"
-};
-module.exports.apply = {
-  reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": "Да", "callback_data": "yes" }, { "text": "Нет", "callback_data": "no" }]]
-  }),
-  parse_mode: "HTML"
-};
-module.exports.post_admin = {
-  reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": "Премиум", "callback_data": "vip" }],
-    [{ "text": "Горячее", "callback_data": "hot" }],
-    [{ "text": "Редактировать", "callback_data": "edit" }],
-    [{ "text": "Опубликовать", "callback_data": "public" }],
-    [{ "text": "Отложить", "callback_data": "defer" }],
-    [{ "text": "Отменить", "callback_data": "cancel" }]
-    ]
-  }),
-  parse_mode: "HTML"
-};
-
-module.exports.set_type_size = {
-  reply_markup: JSON.stringify({
-    "inline_keyboard": [
-      [{ "text": "UK", "callback_data": "type_UK" },
-      { "text": "US", "callback_data": "type_US" },
-      { "text": "EU", "callback_data": "type_EU" }],
-    ]
-  })
-};
 module.exports.varClOpt= {
   reply_markup: JSON.stringify({
     "inline_keyboard": [[{ "text": "Антигравийная", "callback_data": "6_1" }],
@@ -74,38 +32,16 @@ module.exports.varClOpt= {
     [{ "text": "Глянцевая", "callback_data": "5_back" }]]
   })
 };
-module.exports.opts_set_1 = {
+
+module.exports.varClOpt= {
   reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": "Кроссовки", "callback_data": "1" }],
-    [{ "text": "➡️ Далее", "callback_data": "done" }],
-    [{ "text": "⬅️ Назад", "callback_data": "back" }]]
-  })
-};
-module.exports.data_set = {
-  reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": "Сегодня", "callback_data": "data_1" },
-    { "text": "Завтра", "callback_data": "data_2" },
-    { "text": "Послезавтра", "callback_data": "data_3" }],
-    [{ "text": "Указать дату", "callback_data": "set_data" }]]
-  })
-};
-module.exports.opts_set_2 = {
-  reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": "▪️ Кроссовки", "callback_data": "1" }],
-    [{ "text": "➡️ Далее", "callback_data": "done" }],
-    [{ "text": "⬅️ Назад", "callback_data": "back" }]]
-  })
-};
-module.exports.opts_set_3 = {
-  reply_markup: JSON.stringify({
-    "inline_keyboard": [
-      [{ "text": "Мужской", "callback_data": "2_2" }],
-      [{ "text": "Женский", "callback_data": "2_3" }],
-      [{ "text": "⬅️ Назад", "callback_data": "back" }]]
+    "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "6_1" }]]
   })
 };
 
+module.exports.company = 'О компании'
 module.exports.varCl = 'Варианты оклейки'
+module.exports.procCl = 'Процесс оклейки'
 module.exports.start_text = '<b>Оклейка авто в Воронеже</b>\n\nВыделяемся из толпы правильно';
 module.exports.opt = {
   reply_markup: JSON.stringify({

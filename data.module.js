@@ -33,7 +33,7 @@ module.exports.varClOpt= {
   })
 };
 
-module.exports.varClOpt= {
+module.exports.procClOpt= {
   reply_markup: JSON.stringify({
     "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "6_1" }]]
   })

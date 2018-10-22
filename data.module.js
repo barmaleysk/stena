@@ -122,7 +122,6 @@ module.exports.opt = {
 module.exports.chat = -256157570;
 module.exports.link_bot = 'https://t.me/Dev_19999_Bot?start=';
 module.exports.admin_root_id = 667183501;
-module.exports.token = '613439384:AAHw5VAq4MtlsqxBi4LdwhCYwOiK1-PMZGQ';
-module.exports.callback_token = '660189538:AAHa24_ca1phApTBWT434HTiRbPH7bX8YIk';
+module.exports.token = '660189538:AAHa24_ca1phApTBWT434HTiRbPH7bX8YIk';
 module.exports.baseApiUrl = 'https://api.telegram.org';
 

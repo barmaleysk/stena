@@ -40,6 +40,7 @@ class FeedBackController extends TelegramBaseController {
 class StartController extends TelegramBaseController {
     startHandler($) {
         $.sendMessage("привет")
+        console.log('fff')
     }
     get routes() { return { 'startCommand': 'startHandler' } }
 }

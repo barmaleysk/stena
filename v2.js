@@ -136,7 +136,7 @@ class VarCl extends TelegramBaseController {
 class ProcCl extends TelegramBaseController {
     qProcCl($) { 
         //analytic.add('Процесс оклейки', $); 
-        tg.api.sendPhoto($._userId,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',procClOpt)
+        tg.api.sendPhoto($._userId,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt)
     }
     get routes() { return { 'procCl': 'qProcCl' } }
 }

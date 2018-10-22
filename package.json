@@ -1,0 +1,27 @@
+{
+  "name": "bot_ton",
+  "version": "1.0.0",
+  "description": "telegram bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JCompile/toner.git"
+  },
+  "keywords": [
+    "telegram"
+  ],
+  "author": "Garen",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^2.2.16",
+    "node-telegram-bot-api": "^0.30.0",
+    "telegram-node-bot": "^4.0.5"
+  },
+  "bugs": {
+    "url": "https://github.com/JCompile/toner/issues"
+  },
+  "homepage": "https://github.com/JCompile/toner#readme"
+}

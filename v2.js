@@ -137,7 +137,8 @@ class Company extends TelegramBaseController {
 class VarCl extends TelegramBaseController {
     qVarCl($) { 
         analytic.add('Варианты оклейки', $); 
-        $.sendMessage(data.varCl, data.varClOpt)
+        $.sendMessage(data.varCl, data.varClOpt);
+        console.log('d')
     }
     get routes() { return { 'varCl': 'qVarCl' } }
 }

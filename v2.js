@@ -27,9 +27,9 @@ class OtherwiseController extends TelegramBaseController {
 class CallbackQueryController extends TelegramBaseCallbackQueryController {
     handle($) {
         if ($._data == 'next_step') {  tg.api.sendPhoto($._from._id,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt) }
-        if ($._data == 'next_step_1') {  tg.api.sendPhoto($._from._id,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt_1) }
-        if ($._data == 'next_step_2') {  tg.api.sendPhoto($._from._id,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt_2) }
-        if ($._data == 'next_step_3') {  tg.api.sendPhoto($._from._id,  'AgADAgADiakxGwM5cEqwQ3vFkQekHeG7tw4ABAkO-WYuKHlO4nkFAAEC',data.procClOpt_3) }
+        if ($._data == 'next_step_1') {  tg.api.sendPhoto($._from._id,  'AgADAgADlKkxGwM5cEo9Lth0sCU-pqDstw4ABPZTUTisj7LXSboBAAEC',data.procClOpt_1) }
+        if ($._data == 'next_step_2') {  tg.api.sendPhoto($._from._id,  'AgADAgADlakxGwM5cErl-feoohUos9TJtw4ABNafWDq4VSK6KIUFAAEC',data.procClOpt_2) }
+        if ($._data == 'next_step_3') {  tg.api.sendPhoto($._from._id,  'AgADAgADlqkxGwM5cEoJzU57H7CbUgRI8w4ABJ3yy11wfS1iy7IBAAEC',data.procClOpt_3) }
     }
 }
 class FeedBackController extends TelegramBaseController {

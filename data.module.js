@@ -46,18 +46,18 @@ module.exports.procClOpt_1= {
     "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "next_step_2" }]]
   }),
   parse_mode: "HTML",
-  caption: "<b>Процесс оклейки</b>\n\nШаг 2\n\nМойка кузова и обезжиривание спец.оборудованием"
+  caption: "<b>Процесс оклейки</b>\n\nШаг 2\n\nПодготовка кузова к оклейке и частичная разборка"
 };
 module.exports.procClOpt_2= {
   reply_markup: JSON.stringify({
     "inline_keyboard": [[{ "text": " Следующий шаг ", "callback_data": "next_step_3" }]]
   }),
   parse_mode: "HTML",
-  caption: "<b>Процесс оклейки</b>\n\nШаг 3\n\nМойка кузова и обезжиривание спец.оборудованием"
+  caption: "<b>Процесс оклейки</b>\n\nШаг 3\n\nОклейка автомобиля. Сборка и финальная полировка"
 };
 module.exports.procClOpt_3= {
   parse_mode: "HTML",
-  caption: "<b>Процесс оклейки</b>\n\nШаг 4\n\nМойка кузова и обезжиривание спец.оборудованием"
+  caption: "<b>Процесс оклейки</b>\n\nШаг 4\n\nКонтрольная проверка через 7 дней. Выдаем гарантию"
 };
 
 module.exports.company = 'О компании'

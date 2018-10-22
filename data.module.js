@@ -41,7 +41,7 @@ module.exports.procClOpt= {
 
 module.exports.company = 'О компании'
 module.exports.varCl = 'Варианты оклейки'
-module.exports.procCl = 'Процесс оклейки'
+module.exports.procCl = 'Процесс оклейки \nШаг 1\n Мойка кузова и обезжиривание спец.оборудованием'
 module.exports.start_text = '<b>Оклейка авто в Воронеже</b>\n\nВыделяемся из толпы правильно';
 module.exports.opt = {
   reply_markup: JSON.stringify({

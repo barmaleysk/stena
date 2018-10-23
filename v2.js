@@ -11,7 +11,7 @@ const tg = new Telegram.Telegram(data.token, { workers: 1 })
 
 class OtherwiseController extends TelegramBaseController {
     handle($) {
-console.log($)
+
         if ($._message._photo) {//<-----------
             console.log($._message._photo)
             

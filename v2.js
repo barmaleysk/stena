@@ -32,8 +32,10 @@ class CallbackQueryController extends TelegramBaseCallbackQueryController {
 class StartController extends TelegramBaseController {
     startHandler($) {
         lib.newUser($)
-        if($._userId == data.admin_root_id){ $.sendMessage(data.start_text_admin, data.opt_admin) }
-        else{ $.sendMessage(data.start_text, data.opt) } 
+       // if($._userId == data.admin_root_id){ $.sendMessage(data.start_text_admin, data.opt_admin) }
+       // else{ 
+            $.sendMessage(data.start_text, data.opt) 
+     //   } 
     }
     get routes() { return { 'startCommand': 'startHandler' } }
 }

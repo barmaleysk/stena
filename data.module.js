@@ -70,7 +70,7 @@ module.exports.contact = '<b>Контакты</b>\n\nТелефон: +7 930 400-
 
 module.exports.chat = -256157570;
 module.exports.link_bot = 'https://t.me/Dev_19999_Bot?start=';
-module.exports.admin_root_id = 2751410320;
+module.exports.admin_root_id = 275141032;
 module.exports.token = '660189538:AAHa24_ca1phApTBWT434HTiRbPH7bX8YIk';
 module.exports.baseApiUrl = 'https://api.telegram.org';
 

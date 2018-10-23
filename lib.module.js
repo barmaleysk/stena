@@ -6,7 +6,7 @@ const analytic = require('./analytics/analytics');
 var client;
 connect.connect(config.url, () => { client = crud.getDB(); });
 
-
+var user_db = 'users_ton';
 
 var post_sort = function (post, callback) {
     crud.findS("users", (users) => {
@@ -43,68 +43,6 @@ var post_sort = function (post, callback) {
             callback(sort_3);
         }
     })
-};
-var formSize = function (size, text, type) {
-    var text = text + "\n\n" + "Размеры:"
-    size = duplicate(size);
-    for (var i = 0; i < size.length; i++) {
-        if (i == 0) { text = text + type + size[i] }
-        if (i > 0) { text = text + ", " + type + size[i] }
-    }
-    return text
-};
-var size_conform = function (type, size_1, size_2, gender) {
-    var indx_1; var indx_2 = RUm.indexOf(size_2)
-    if (gender.indexOf(2) != -1 && gender.indexOf(3) == -1) {
-        if (type == "UK") { indx_1 = data.UKMm.indexOf(size_1) };
-        if (type == "US") { indx_1 = data.USMm.indexOf(size_1) }
-        if (type == "EU") { indx_1 = data.EUMm.indexOf(size_1) };
-    }
-    if (gender.indexOf(2) == -1 && gender.indexOf(3) != -1) {
-        if (type == "UK") { indx_1 = data.UKWm.indexOf(size_1) };
-        if (type == "US") { indx_1 = data.USWm.indexOf(size_1) }
-        if (type == "EU") { indx_1 = data.EUWm.indexOf(size_1) };
-    }
-    if (gender.indexOf(2) != -1 && gender.indexOf(3) != -1) {
-        if (type == "UK") { indx_1 = data.UKWMm.indexOf(size_1) };
-        if (type == "US") { indx_1 = data.USWMm.indexOf(size_1) }
-        if (type == "EU") { indx_1 = data.EUWMm.indexOf(size_1) };
-    }
-    return indx_1 == indx_2
-}
-var size_convert = function (sizeIn, size) {
-    var indx; var gender = sizeIn.slice(4, 5); var type = sizeIn.slice(2, 4)
-    if (gender == "M") {
-        if (type == "UK") { indx = data.UKMm.indexOf(size) }; if (type == "US") { indx = data.USMm.indexOf(size) }
-        if (type == "EU") { indx = data.EUMm.indexOf(size) }; if (type == "RU") { indx = data.RUMm.indexOf(size) }
-        var ind = data.RUMm[indx]
-    }
-    if (gender == "W") {
-        if (type == "UK") { indx = data.UKWm.indexOf(size) }; if (type == "US") { indx = data.USWm.indexOf(size) }
-        if (type == "EU") { indx = data.EUWm.indexOf(size) }; if (type == "RU") { indx = data.RUWm.indexOf(size) }
-        var ind = data.RUWm[indx]
-    }
-    if (gender == "U") {
-        if (type == "UK") { indx = data.UKWMm.indexOf(size) }; if (type == "US") { indx = data.USWMm.indexOf(size) }
-        if (type == "EU") { indx = data.EUWMm.indexOf(size) }; if (type == "RU") { indx = data.RUWMm.indexOf(size) }
-    }
-    return ind
-}
-var sorting = function (sort_1, text2, callback) {
-    max = 0; sort = []; k = sort_1.length;
-    for (var l = 0; l < k; l++) {
-        for (var j = 1; j < sort_1.length; j++) { if (sort_1[j].ref > sort_1[max].ref) { max = j; } }
-        sort.push(sort_1[max]); sort_1.splice(max, 1); max = 0;
-    }
-    top = sort.length; text = text2;
-    if (top > 10) top = 10;
-    for (var i = 0; i < top; i++) {
-        var name = ''; var lastname = '';
-        if (sort[i].name != undefined) { name = sort[i].name }
-        if (sort[i].lastname != undefined) { lastname = sort[i].lastname }
-        text = text + "\n"; text = text + (i + 1) + ". " + name + " " + lastname + ": " + sort[i].ref;
-    }
-    callback(text);
 };
 module.exports.text_input = function (msg, sendForward, send) {
     var result_1 = { text: '', opt: data.parse };
@@ -212,28 +150,22 @@ module.exports.add_photo = function (msg, callback) {
         }
     })
 };
-// module.exports.table_offer = function (msg, callback) {
-//     crud.find({ deferred: true }, "posts", (r1) => { 
-//         crud.find({ deferred: true }, "post_free", (r2) => { 
-
-//         }) 
-//     })    
-// }
-
-
 //-------на тест--------------------------------
 var createPost = function (msg) {
     var post = {
         post_id: make_id(5),
         user_id: msg.message.from.id,
-        text: '', date: {},
-        time: {}, setDT: false,
+        text: '',
+        date: {},
+        time: {}, 
+        setDT: false,
         deferred: false,
-        vip: false, photo_file_id: '',
-        new_post: true, add_photo: false,
+        photo_file_id: '',
+        new_post: true, 
+        add_photo: false,
         admin_opt: JSON.parse(data.post_free_admin.reply_markup).inline_keyboard,
     };
-    crud.insertOne(post, "post_free", () => { })
+    crud.insertOne(post, "post_ton", () => { })
 };
 var setDataTime = function (msg, post, collect) {
     var result = { text: "Данные указаны неверно! Повторите ввод в верном формате", opt: data.parse }
@@ -305,38 +237,6 @@ var postF3 = function (post, callback, sort_call) {
         callback(_result)
     })
 };
-var create_user = function (msg) {
-    var ref_g = make_id(15);
-    var user = {
-        user_id: msg._id,
-        cross: true,
-        state_1: false,
-        link_action: false,
-        link_offer: [], link_ref: data.link_bot + ref_g,
-        ref: ref_g,
-        referal: 0,
-        ref_accaunt: [],
-        inline_keyboard: '',
-        state_size: 0,
-        gender: 0,
-        subscribe: false,
-        cross_size: [],
-        cross_push: '',
-        admin: false,
-        offer_set: false,
-        referal_data: [],
-        my_ref: 0,
-        name: msg._firstName,
-        lastname: msg._lastName,
-        add_adm: false,
-        vip: false,
-        new_post: false,
-        ref_lock: true,
-        input: false
-    };
-    return user;
-};
-
 
 module.exports.det_stat_size = function (msg, callback) {
     var u_id = msg.from.id;
@@ -521,19 +421,10 @@ module.exports.newOffer = function (msg) {
     crud.insertOne(post, "posts", () => { })
 };
 module.exports.NewPost = function (msg, callback) {
-    console.log(msg)
     createPost(msg);
     callback({ id: msg.userId, text: data.new_post_text, opt: data.parse })
 }
 
-//-----------Добавить условие о том, кто добавил пост для ограничения-------------------------------------------------------------------
-//module.exports.getPost = function (callback) { crud.findS("posts", (result) => { callback(result[result.length - 1]) }) };
-// var getPostFree = function (callback) { crud.findS("post_free", (r) => { callback(r[r.length - 1]) }) };
-// var getPostFreeAll = function (callback) { crud.findS("post_free", (r) => { callback(r) }) };
-// module.exports.getPostFree = function (callback) { crud.findS("post_free", (r) => { callback(r[r.length - 1]) }) };
-var getPostsFreeAll = function (callback) { crud.findS("post_free", (result) => { callback(result) }) }
-var getPostsAll = function (callback) { crud.findS("posts", (r) => { callback(r) }) }
-//var getPost = function (callback) { crud.findS("posts", (r) => { callback(r[r.length - 1]) }) }
 //-----тесты-------------------------------------------------------
 var getPostFree = function (id, callback) { crud.find({ user_id: id }, "post_free", (r) => { callback(r[r.length - 1]) }) };
 var getPostsFree = function (id, callback) { crud.find({ user_id: id }, "post_free", (r) => { callback(r) }) };
@@ -544,24 +435,6 @@ module.exports.getPostFree = function (id, callback) { crud.find({ user_id: id }
 module.exports.getPost = function (id, callback) { crud.find({ user_id: id }, "posts", (r) => { callback(r[r.length - 1]) }) };
 //---------------------------------------------------------------------------------------------------------------------------------------
 
-
-//------------------Проверено---------------------------
-module.exports.adminMode = function (msg, callback) {
-    var u_id = msg.message.from.id;
-    find_adm(u_id, (res_adm) => {
-        if (u_id == data.admin_root_id || res_adm) {
-            find_id(u_id, (r) => {
-                var result = { text: data.admin_text, opt: '' }
-                if (!result.admin) {
-                    if (res_adm) { result.opt = data.admin_opt } else { result.opt = data.admin_root_opt }
-                    r.admin = true;
-                } else { result.text = data.admin_text_2; result.opt = data.opt; r.admin = false }
-                client.collection("users").update({ user_id: u_id }, r, () => { })
-                callback(result);
-            })
-        }
-    })
-};
 module.exports.det_stat_key = function (msg, callback) {
     var u_id = msg.from.id;
     find_id(u_id, (result) => {
@@ -657,125 +530,12 @@ module.exports.det_stat_common = function (msg, callback) {
         }
     })
 }
-module.exports.lay_off = function (id, msg, callback) {
-    find_id(+id, (r) => {
-        var name = ''; var lastname = ""
-        if (r.name) { name = r.name } else { name = '' };
-        if (r.lastname) { lastname = r.lastname } else { lastname = '' };
-        var txt = `Администратор ${name} ${lastname}`
-        var inl = JSON.parse(data.lay_off.reply_markup).inline_keyboard
-        inl[0][0].callback_data = "lay_" + id
-        var opts = { reply_markup: JSON.stringify({ inline_keyboard: inl }) };
-        callback({ id: msg.from.id, text: txt, opt: opts })
-    })
-}
-module.exports.lay_adm = function (id, msg, callback) {
-    find_id(+id, (r) => {
-        var name = ''; var lastname = ""
-        if (r.name) { name = r.name } else { name = '' };
-        if (r.lastname) { lastname = r.lastname } else { lastname = '' };
-        var txt = `Администратор ${name} ${lastname} уволен`
-        crud.findOneAndUpdate({ user_id: +id }, { $set: { admin: false } }, "users", () => { })
-        crud.deleteOneToEnd({ id: +id }, "admins", () => { })
-        callback({ id: msg.from.id, text: txt, opt: data.parse })
-    })
-}
-module.exports.set_size = function (msg, result, callback) {
-    var inline_keyboard = result.inline_keyboard;
-    inline_keyboard.map(item => {
-        if (typeof item == 'object') {
-            item.map(item => {
-                if (item.callback_data == msg._data) {
-                    if (item.text.slice(0, 1) != data.pref.slice(0, 1)) {
-                        result.cross_size.push(item.text); item.text = data.pref + item.text;
-                        result.state_size += 1;
-                    } else {
-                        for (var y = 0; y < result.cross_size.length; y++) {
-                            if (result.cross_size[y] == item.text.slice(3, 7)) { result.cross_size.splice(y, 1) }
-                        }
-                        item.text = item.text.slice(3, 7); result.state_size -= 1;
-                    }
-                }
-            })
-        }
-    })
-    result.inline_keyboard = inline_keyboard
-    client.collection("users").update({ user_id: msg.from.id }, result, () => { })
-    callback({ reply_markup: JSON.stringify({ inline_keyboard: inline_keyboard }) });
-};
-module.exports.set_size_post = function (msg, result, callback) {
-    var inline_keyboard = result.inline_keyboard;
-    inline_keyboard.map(item => {
-        if (typeof item == 'object') {
-            item.map(item => {
-                if (item.callback_data == msg._data) {
-                    if (item.text.slice(0, 1) != data.pref.slice(0, 1)) {
-                        result.cross_size.push(item.text); item.text = data.pref + item.text;
-                        result.state_size += 1;
-                    } else {
-                        for (var y = 0; y < result.cross_size.length; y++) {
-                            if (result.cross_size[y] == item.text.slice(3, 7)) { result.cross_size.splice(y, 1) }
-                        }
-                        item.text = item.text.slice(3, 7); result.state_size -= 1;
-                    }
-                }
-            })
-        }
-    })
-    result.inline_keyboard = inline_keyboard
-    client.collection("posts").update({ user_id: msg.from.id }, result, () => { })
-    callback({ reply_markup: JSON.stringify({ inline_keyboard: inline_keyboard }) });
-};
-module.exports.size_select = function (u_id, result, callback) {
-    var size = result.cross_size; text = "Вы выбрали:"
-    size = duplicate(size);
-    for (var i = 0; i < size.length; i++) {
-        if (i == 0) { text = text + " EU " + size[i] }
-        if (i > 0) { text = text + ", EU " + size[i] }
-    }
-    callback(text);
-    client.collection("users").update({ user_id: u_id }, { $set: { subscribe: true } })
-};
-module.exports.newUser = function (msg) {
-    find_id(msg._userId, (result) => {
-        if (!result) { crud.insertOne(create_user(msg.message.from), "users", () => { }) }
-    })
-};
-module.exports.add_admin = function (msg, callback) {
-    var u_id = msg.from.id; var adm_id = msg.forwardFrom.id
-    find_id(u_id, (r) => {
-        if (r) {
-            if (u_id == data.admin_root_id && r.add_adm) {
-                var res = { text: '', opt: data.parse }
-                var _res = { id: adm_id, name: '', last_name: '' }
-                var name = ''; var lastname = ""
-                if (msg.forwardFrom.firstName) { name = msg.forwardFrom.firstName; _res.name = msg.forwardFrom.firstName } else { name = '' };
-                if (msg.forwardFrom.lastName) { lastname = msg.forwardFrom.lastName; _res.last_name = msg.forwardFrom.lastName } else { lastname = '' };
-                res.text = data.add_new_adm + name + " " + lastname; callback(res);
-                crud.insertOne(_res, "admins", () => { });
-                crud.findOneAndUpdate({ user_id: u_id }, { $set: { add_adm: false } }, "users", () => { })
-            }
-        }
-    })
-};
-module.exports.admins = function (callback) {
-    var start = [{ text: "Добавить", callback_data: "add_adm" }]; var end = [{ text: "⬅️ Назад", callback_data: "back" }]
-    var inline_keyboard = []; inline_keyboard.push(start)
-    crud.findS("admins", (result) => {
-        for (var i = 0; i < result.length; i++) {
-            var add = [{ text: "", callback_data: "" }]; add[0].text = result[i].name + " " + result[i].last_name;
-            add[0].callback_data = "adm_" + result[i].id; inline_keyboard.push(add)
-        }
-        inline_keyboard.push(end); reply = { reply_markup: JSON.stringify({ inline_keyboard }) }
-        callback(reply)
-    })
-}
 module.exports.getUsers = function (callback) { crud.findS("users", (result) => { callback(result) }) }
 module.exports.find_id = function (id, callback) { crud.findOne({ user_id: id }, "users", (result) => { if (result) { callback(result) } else { callback(false) } }) };
 //------------------Служебные внутренние---------------------------
-var find_acc = function (id, callback) { crud.findOne({ ref_accaunt: id }, "users", (result) => { if (result) { callback(false) } else { callback(true) } }) };
-var find_ref = function (_ref, callback) { crud.findOne({ ref: _ref }, "users", (result) => { if (result) { callback(result) } else { callback(false) } }) };
-var find_id = function (id, callback) { crud.findOne({ user_id: id }, "users", (result) => { if (result) { callback(result) } else { callback(false) } }) };
+var find_acc = function (id, callback) { crud.findOne({ ref_accaunt: id }, user_db, (result) => { if (result) { callback(false) } else { callback(true) } }) };
+var find_ref = function (_ref, callback) { crud.findOne({ ref: _ref }, user_db, (result) => { if (result) { callback(result) } else { callback(false) } }) };
+var find_id = function (id, callback) { crud.findOne({ user_id: id }, user_db, (result) => { if (result) { callback(result) } else { callback(false) } }) };
 var newDate = function () { var date = new Date(); return { d: date.getDate(), m: date.getMonth() + 1, y: date.getFullYear() } };
 var make_id = function (n) {
     var text = ""; var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -783,120 +543,6 @@ var make_id = function (n) {
     return text;
 };
 var newTime = function () { var date = new Date(); return { h: date.getHours(), m: date.getMinutes() } };
-var compareNumeric = function (a, b) { if (a > b) return 1; if (a < b) return -1 }
-var find_adm = function (id, callback) {
-    var res = false;
-    crud.findS("admins", (admins) => { admins.map(item => { if (item.id == id) res = true }); callback(res) })
-};
-var duplicate = function (arr) {
-    var i = 0, current, length = arr.length, unique = [], arr2 = []
-    for (; i < length; i++) { current = arr[i]; if (!~unique.indexOf(current)) { unique.push(current) } }
-    unique.map(item => arr2.push(+item))
-    unique = arr2.sort(compareNumeric)
-    return unique
-}
-//-------------------RexCom-----------------------------
-module.exports.salecom = function (msg, callback) {
-    find_id(msg.message.from.id, (r) => {
-        client.collection("users").update({ user_id: msg.message.from.id }, { $set: { link_action: true } }, () => { })
-        if (r.referal >= 3) { callback({ text: data.sale_text_4, buy: false }) }
-        if (r.referal < 3) { callback({ text: data.sale_text_1, buy: true }) }
-    });
-}
-module.exports.refcom = function (msg, callback) {
-    find_id(msg.message.from.id, (r) => {
-        client.collection("users").update({ user_id: msg.message.from.id }, { $set: { link_action: true } }, () => { })
-        callback(data.sale_text_2 + r.referal + data.sale_text_3)
-    });
-}
-module.exports.setcom = function (msg, callback) {
-    callback({ text: data.choice_gen, opt: data.opts_set_3 })
-    client.collection("users").update({ user_id: msg.message.from.id }, { $set: { link_action: true } }, () => { })
-}
-module.exports.linkcom = function (msg, callback) {
-    callback({ text: data.link_text, opt: data.parse })
-    client.collection("users").update({ user_id: msg.message.from.id }, { $set: { link_action: true } }, () => { })
-}
-module.exports.inlinecom = function (msg, callback) {
-    var result = [{
-        id: "1", type: "article", title: `Поделиться ссылкой`,
-        input_message_content: { message_text: `SaleFinder - бот, высылающий самые большие скидки на кроссовки нужного размера в крупнейших интернет-магазинах. Попробуй 😏` },
-        reply_markup: { inline_keyboard: [[{ "text": "😏 Попробовать", "url": `${data.link_bot + msg}` }]] }
-    }];
-    callback(result)
-}
-module.exports.getref = function (msg, callback) {
-    find_id(msg._chat._id, (result) => {
-        var opts = {
-            reply_markup: JSON.stringify({
-                "inline_keyboard": [[{ "text": "🌍 Поделиться в Telegram", "switch_inline_query": `${result.ref}` }]]
-            }),
-            parse_mode: "HTML"
-        };
-        callback({ text: data.ref_text, opt: opts })
-    })
-
-}
-module.exports.feed_back = function (msg) {
-    client.collection("users").update({ user_id: msg.message.from.id }, { $set: { link_action: true } }, () => { })
-}
-//-------------------Рейтинг----------------------------
-module.exports.search_week = function (callback) {
-    var sort_1 = []; var text = 'Рейтинг за неделю\n';
-    var date = new Date(); d = date.getDate(); m = date.getMonth() + 1; y = date.getFullYear();
-    crud.findS("users", (users) => {
-        if (users) {
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].referal_data) {
-                    l = 0;
-                    for (var j = 0; j < users[i].referal_data.length; j++) {
-                        if (users[i].referal_data[j].y == y & users[i].referal_data[j].m == m & users[i].referal_data[j].d > d - 7) { l++ }
-                    }
-                    if (l > 0) { u = { name: users[i].name, lastname: users[i].lastname, ref: l }; sort_1.push(u) }
-                }
-            }
-            sorting(sort_1, text, (result) => { callback({ text: result, opt: data.back }) })
-        }
-    })
-};
-module.exports.search_month = function (callback) {
-    var sort_2 = []; var text = 'Рейтинг за месяц\n';
-    var date = new Date(); d = date.getDate(); m = date.getMonth() + 1; y = date.getFullYear();
-    crud.findS("users", (users) => {
-        if (users) {
-            for (var i = 0; i < users.length; i++) {
-                if (users[i].referal_data) {
-                    l = 0;
-                    for (var j = 0; j < users[i].referal_data.length; j++) {
-                        if (users[i].referal_data[j].y == y & users[i].referal_data[j].m == m - 1 & users[i].referal_data[j].d >= d) { l++; nm = users[i].name; lnm = users[i].lastname; }
-                    }
-                    if (d > 1) {
-                        for (var j = 0; j < users[i].referal_data.length; j++) {
-                            if (users[i].referal_data[j].y == y & users[i].referal_data[j].m == m & users[i].referal_data[j].d <= d) { l++ }
-                        }
-                    }
-                    if (l > 0) { u = { name: users[i].name, lastname: users[i].lastname, ref: l }; sort_2.push(u) }
-                }
-            }
-            sorting(sort_2, text, (result) => { callback({ text: result, opt: data.back }) })
-        }
-    })
-};
-module.exports.search_all = function (callback) {
-    var sort_2 = []; var text = 'Рейтинг за весь период\n';
-    crud.findS("users", (result) => {
-        if (result) {
-            for (var i = 0; i < result.length; i++) {
-                if (result[i].referal_data) {
-                    l = 0;
-                    for (var j = 0; j < result[i].referal_data.length; j++) { l++ }
-                    if (l > 0) { u = { name: result[i].name, lastname: result[i].lastname, ref: l }; sort_2.push(u) }
-                }
-            }
-            sorting(sort_2, text, (result) => { callback({ text: result, opt: data.back }) })
-        }
-    })
-};
 //------------Реферальная система-----------------------
 module.exports.new_referal = function (msg) {
     var u_id = msg.message.from.id; var ref = msg.message.text.slice(7, 22);
@@ -907,7 +553,7 @@ module.exports.new_referal = function (msg) {
                     if (user_ref.user_id != u_id) {
                         if (result.my_ref == 0) {
                             result.my_ref = user_ref.user_id
-                            client.collection("users").update({ user_id: result.user_id }, result, () => { })
+                            client.collection(user_db).update({ user_id: result.user_id }, result, () => { })
                         }
                     }
                 })
@@ -929,84 +575,76 @@ module.exports.addReferal = function (msg, result, callback) {
                 //-----------------
                 if (msg.from.firstName) text = text + msg.from.firstName;
                 if (msg.from.lastName) text = text + " " + msg.from.lastName;
-                if (user_ref.referal == 1) num = ". Пригласи еще 2-ух друзей для доступа 👌 к <b>премиум-скидкам</b>"
-                if (user_ref.referal == 2) num = ". Пригласи еще 1-го друга для доступа 👌 к <b>премиум-скидкам</b>"
-                if (user_ref.referal == 3) num = ". Ура! Ты получил доступ 👌 к <b>премиум-скидкам</b>. Приглашай больше друзей и участвуй в розыгрышах кроссовок"
-                if (user_ref.referal > 3) num = ". Ты пригласил уже " + user_ref.referal + ". Приглашай больше друзей и участвуй в розыгрышах кроссовок"
+                if (user_ref.referal == 1) num = ". Пригласи еще 4-ух друзей чтобы получить 👌 <b>скидку</b>"
+                if (user_ref.referal == 2) num = ". Пригласи еще 3-ух друзей чтобы получить 👌 <b>скидку</b>"
+                if (user_ref.referal == 3) num = ". Пригласи еще 2-ух друзей чтобы получить 👌 <b>скидку</b>"
+                if (user_ref.referal == 4) num = ". Пригласи еще 1-го друга чтобы получить 👌 <b>скидку</b>"
+                if (user_ref.referal == 5) num = ". Ура! Ты получил 👌 <b>скидку</b>. Приглашай больше друзей и участвуй в лимитированных акциях"
+                if (user_ref.referal > 5) num = ". Ты пригласил уже " + user_ref.referal + ". Приглашай больше друзей и участвуй в лимитированных акциях"
                 text = text + num
                 //-----------------
                 _result.text = text;
-                client.collection("users").update({ user_id: user_ref.user_id }, user_ref, () => { })
+                client.collection(user_db).update({ user_id: user_ref.user_id }, user_ref, () => { })
                 callback(_result);
             }
         })
     }
 }
+module.exports.getref = function (msg, callback) {
+    find_id(msg._chat._id, (result) => {
+        var opts = {
+            reply_markup: JSON.stringify({
+                "inline_keyboard": [[{ "text": "🌍 Пригласить друга", "switch_inline_query": `${result.ref}` }]]
+            }),
+            parse_mode: "HTML"
+        };
+        callback({ text: data.ref_text, opt: opts })
+    })
 
-
-//----------В резерве---------------------------------
-{
-    // module.exports.update = function (result) {
-    //     if (result) {
-    //         var set = { reply_markup: data.opts_set_3.reply_markup };
-    //         var RUM = JSON.parse(data.RUM.reply_markup).inline_keyboard
-    //         var RUW = JSON.parse(data.RUW.reply_markup).inline_keyboard
-    //         for (var i = 0; i < result.length; i++) {
-    //             result[i].cross = false;
-    //             result[i].subscribe = false;
-    //             result[i].cross_size = [];
-    //             result[i].gender = [];
-    //             client.collection("users").update({ user_id: result[i].user_id }, result[i], () => { })
-    //         }
-    //     }
-    // }
-    // module.exports.set_size_post = function (msg, callback) {
-    //     getPost(msg._userId, (result) => {
-    //         if (result) {
-    //             var inline_keyboard = result.inline_keyboard;
-    //             var opts = { reply_markup: { inline_keyboard: '' } }
-    //             for (var i = 0; i < inline_keyboard.length; i++) {
-    //                 for (var j = 0; j < inline_keyboard[0].length; j++) {
-    //                     if (inline_keyboard[i][j]) {
-    //                         if (inline_keyboard[i][j].callback_data == msg.data) {
-    //                             if (inline_keyboard[i][j].text.slice(0, 1) != data.pref.slice(0, 1)) {
-    //                                 result.cross_size.push(size_convert(msg.data, inline_keyboard[i][j].text));///////////
-    //                                 //  result.cross_size.push(inline_keyboard[i][j].text.slice(0, 4));
-    //                                 inline_keyboard[i][j].text = data.pref + inline_keyboard[i][j].text;
-    //                                 result.state_size += 1;
-    //                             } else {
-    //                                 result.state_size -= 1;
-    //                                 for (var y = 0; y < result.cross_size.length; y++) { if (result.cross_size[y] == inline_keyboard[i][j].text.slice(3, 7)) { result.cross_size.splice(y, 1) } }
-    //                                 inline_keyboard[i][j].text = inline_keyboard[i][j].text.slice(3, 7);
-    //                             }
-
-    //                         }
-    //                     }
-    //                 }
-    //             }
-    //             opts.reply_markup.inline_keyboard = inline_keyboard;
-    //             callback(opts);
-    //             client.collection("posts").update({ post_id: result.post_id }, result, () => { })
-    //         }
-    //     })
-    // };
-    // function notVIP(post, callback) { client.collection("users").find({ cross: true }, { gender: post.gender }, { cross_size: post.cross_size }, (result) => { if (!err) callback(results) }) }
-    // post_sort2 = function (post, callback) {
-    //     var client = crud.getDB();
-    //     if (post.vip) { client.collection("users").find({ vip: true }, { cross: true }, { gender: post.gender }, { cross_size: post.cross_size }, (result) => { if (!err) callback(results) }) }
-    //     else {
-    //         notVIP(post)
-    //         client.collection("users").find({ subscribe: false }, (result) => { if (!err) callback(results) })
-    //     }
-    // };
-    // var postF = function (u_id, callback) {
-    //     var _result = { file: '', id: '', opt: '' };
-    //     getPost(u_id, (post) => {
-    //         var text = post.text; var size = post.cross_size
-    //         var opt = { reply_markup: data.post_admin.reply_markup, caption: formSize(size, text), parse_mode: "HTML" }
-    //         post.post_item = opt; crud.findOneAndUpdate({ post_id: post.post_id }, post, "posts", () => { })
-    //         _result.id = u_id; _result.file = post.photo_file_id; _result.opt = opt;
-    //         callback(_result);
-    //     })
-    // };
 }
+module.exports.refcom = function (msg, callback) {
+    find_id(msg.message.from.id, (r) => {
+        client.collection(user_db).update({ user_id: msg.message.from.id }, { $set: { link_action: true } }, () => { })
+        callback(data.sale_text_2 + r.referal + data.sale_text_3)
+    });
+}
+module.exports.inlinecom = function (msg, callback) {
+    var result = [{
+        id: "1", type: "article", title: `Поделиться ссылкой`,
+        input_message_content: { message_text: `Привет, автолюбитель! Присоединяйся к нам и твоя машину бедт радовать тебя каждый день` },
+        reply_markup: { inline_keyboard: [[{ "text": "😏 Присоединиться", "url": `${data.link_bot + msg}` }]] }
+    }];
+    callback(result)
+}
+//--------------------------------------------------------
+var new_user = function (msg){
+    var ref_g = make_id(15);
+    return {
+        user_id: msg._id,
+        number: msg,
+        data: newDate(),
+        time: newTime(),
+        link_action: false,
+        link_offer: [], 
+        link_ref: data.link_bot + ref_g,
+        ref: ref_g,
+        referal: 0,
+        ref_accaunt: [],
+        referal_data: [],
+        my_ref: 0,
+        name: msg._firstName,
+        lastname: msg._lastName
+    }
+}
+var new_consul = function(msg){
+    return {
+        user_id: msg._id,
+        name: msg._firstName,
+        lastname: msg._lastName,
+        number: msg,
+        data: newDate(),
+        time: newTime()
+    };
+}
+module.exports.consul = function (msg, result){ crud.insertOne(new_consul(msg), "consul_ton", () => { }) }
+module.exports.newUser = function (msg, result){ find_id(msg._userId, (result) => { if (!result & msg._userId != data.admin_root_id) { crud.insertOne(new_user(msg), user_db, () => { }) } }) }

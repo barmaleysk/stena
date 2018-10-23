@@ -1,6 +1,6 @@
 'use strict'
 const data = require('./data.module');
-//const lib = require('./lib.module');
+const lib = require('./lib.module');
 //const crud = require('./crud/crud');
 //const analytic = require('./analytics/analytics');
 const Telegram = require('telegram-node-bot')
@@ -11,12 +11,14 @@ const tg = new Telegram.Telegram(data.token, { workers: 1 })
 
 class OtherwiseController extends TelegramBaseController {
     handle($) {
-
         if ($._message._photo) {//<-----------
             console.log($._message._photo)
-            
         }
-
+        if ($) {
+            lib.consul($)
+            $.sendMessage('Заявка отправлена.\n Мы свяжемся с вами в течение 5 минут')
+            tg.api.sendMessage(data.admin_root_id, "Новая заявка на бесплатную консультацию ...");
+        }
     }
 }
 class CallbackQueryController extends TelegramBaseCallbackQueryController {
@@ -27,13 +29,11 @@ class CallbackQueryController extends TelegramBaseCallbackQueryController {
         if ($._data == 'next_step_3') {  tg.api.sendPhoto($._from._id,  'AgADAgADlqkxGwM5cEoJzU57H7CbUgRI8w4ABJ3yy11wfS1iy7IBAAEC',data.procClOpt_3) }
     }
 }
-class FeedBackController extends TelegramBaseController {
-    feedback($) { lib.feed_back($); analytic.add('Обратная связь', $); $.sendMessage(data.link_text) }
-    get routes() { return { 'FeedBack': 'feedback' } }
-}
 class StartController extends TelegramBaseController {
     startHandler($) {
-        $.sendMessage(data.start_text, data.opt)
+        lib.newUser($)
+        if($._userId == data.admin_root_id){ $.sendMessage(data.start_text_admin, data.opt_admin) }
+        else{ $.sendMessage(data.start_text, data.opt) } 
     }
     get routes() { return { 'startCommand': 'startHandler' } }
 }
@@ -57,65 +57,21 @@ class AdminController extends TelegramBaseController {
 }
 class RefController extends TelegramBaseController {
     refFun($) {
-        analytic.add('Реферальная программа', $);
+        //analytic.add('Реферальная программа', $);
         lib.refcom($, (result) => {
             $.runInlineMenu({
                 layout: 1,
                 method: 'sendMessage',
                 params: [result, data.parse],
                 menu: [
-                    {
-                        text: 'Рейтинг',
-                        message: 'Выберите период',
-                        layout: 1,
-                        menu: [
-                            {
-                                text: 'За неделю', callback: (callbackQuery, msg) => {
-                                    analytic.add('Рейтинг', msg);
-                                    lib.search_week((r) => { $.deleteMessage(msg._messageId); $.sendMessage(r.text, r.opt) })
-                                }
-                            },
-                            {
-                                text: 'За месяц', callback: (callbackQuery, msg) => {
-                                    analytic.add('Рейтинг', msg);
-                                    lib.search_month((r) => { $.deleteMessage(msg._messageId); $.sendMessage(r.text, r.opt) })
-                                }
-                            },
-                            {
-                                text: 'За весь период', callback: (callbackQuery, msg) => {
-                                    analytic.add('Рейтинг', msg);
-                                    lib.search_all((r) => { $.deleteMessage(msg._messageId); $.sendMessage(r.text, r.opt) })
-                                }
-                            }
-                        ]
-                    },
-                    { text: 'Пригласить друга', callback: (callbackQuery, msg) => { analytic.add('Пригласить друга', msg); lib.getref(msg, (r) => { $.sendMessage(r.text, r.opt) }) } },
-                    { text: '⬅️ Назад', callback: (callbackQuery, msg) => { $.deleteMessage(msg._messageId) } }
+                    { text: 'Пригласить друга', callback: (callbackQuery, msg) => { 
+                        //analytic.add('Пригласить друга', msg); 
+                        lib.getref(msg, (r) => { $.sendMessage(r.text, r.opt) }) } },
                 ]
             })
         })
     }
-    get routes() { return { 'ref_com': 'refFun' } }
-}
-class SaleController extends TelegramBaseController {
-    saleFun($) {
-        analytic.add('Премиум скидки', $);
-        lib.salecom($, (r) => {
-            if (r.buy) {
-                $.runInlineMenu({
-                    layout: 1,
-                    method: 'sendMessage',
-                    params: [r.text, data.parse],
-                    menu: [{
-                        text: 'Оплатить', callback: () => {
-                            //оплата
-                        }
-                    }]
-                })
-            } else { $.sendMessage(r.text, data.parse) }
-        })
-    }
-    get routes() { return { 'sale_com': 'saleFun' } }
+    get routes() { return { 'refCom': 'refFun' } }
 }
 class Qwest extends TelegramBaseController {
     qQwest($) { 
@@ -152,7 +108,34 @@ class Contact extends TelegramBaseController {
     }
     get routes() { return { 'contact': 'qContact' } }
 }
-
+class RSS extends TelegramBaseController {
+    qRSS($) { 
+        //analytic.add('rss', $); 
+        $.sendMessage(data.rss, data.rssOpt)
+    }
+    get routes() { return { 'rss': 'qRSS' } }
+}
+class Stat extends TelegramBaseController {
+    qStat($) { 
+        //analytic.add('stat', $); 
+        $.sendMessage(data.stat, data.statOpt)
+    }
+    get routes() { return { 'stat': 'qStat' } }
+}
+class Upload extends TelegramBaseController {
+    qStat($) { 
+        //analytic.add('upload', $); 
+        $.sendMessage(data.upload, data.uploadOpt)
+    }
+    get routes() { return { 'upload': 'qUpload' } }
+}
+class Consul extends TelegramBaseController {
+    qConsul($) { 
+        //analytic.add('consul', $); 
+        $.sendMessage(data.consul, data.consulOpt)
+    }
+    get routes() { return { 'consul': 'qConsul' } }
+}
 
 tg.router
     .when(new TextCommand('/start', 'startCommand'), new StartController())
@@ -160,8 +143,11 @@ tg.router
     .when(new TextCommand('Варианты оклейки', 'varCl'), new VarCl())
     .when(new TextCommand('Процесс оклейки', 'procCl'), new ProcCl())
     .when(new TextCommand('Отвечаем на вопросы', 'qwest'), new Qwest())
-    .when(new TextCommand('Бесплатная консультация', 'startCommand'), new StartController())
-    .when(new TextCommand('Контакты', 'contact'), new Contact())
-    .when(new TextCommand('Оставить заявку', 'startCommand'), new StartController())
+    .when(new TextCommand('Бесплатная консультация', 'consul'), new Consul())
+    .when(new TextCommand('Контакты и адрес', 'contact'), new Contact())
+    .when(new TextCommand('Пригласи друга', 'refCom'), new RefController())
+    .when(new TextCommand('Рассылка', 'rss'), new RSS())
+    .when(new TextCommand('Статистика', 'stat'), new Stat())
+    .when(new TextCommand('Выгрузить базу', 'upload'), new Upload())
     .callbackQuery(new CallbackQueryController())
     .otherwise(new OtherwiseController())

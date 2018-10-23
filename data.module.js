@@ -22,14 +22,14 @@ module.exports.opts_set_5 = {
 };
 module.exports.varClOpt= {
   reply_markup: JSON.stringify({
-    "inline_keyboard": [[{ "text": "Антигравийная", "callback_data": "6_1" }],
-    [{ "text": "Тонирование", "callback_data": "6_2" }],
-    [{ "text": "Матовая", "callback_data": "6_3" }],
-    [{ "text": "Хром/Золото", "callback_data": "6_3" }],
-    [{ "text": "Винилография", "callback_data": "6_3" }],
-    [{ "text": "Камуфляж", "callback_data": "6_3" }],
-    [{ "text": "Брендирование", "callback_data": "6_3" }],
-    [{ "text": "Глянцевая", "callback_data": "5_back" }]]
+    "inline_keyboard": [[{ "text": "Антигравийная", "callback_data": "6_1","url":"https://medium.com/@savenko136t/%D0%B0%D0%BD%D1%82%D0%B8%D0%B3%D1%80%D0%B0%D0%B2%D0%B8%D0%B9%D0%BD%D0%B0%D1%8F-%D0%BF%D0%BB%D0%B5%D0%BD%D0%BA%D0%B0-8541e113878d" }],
+    [{ "text": "Тонирование", "callback_data": "6_2","url":"https://medium.com/@savenko136t/%D1%82%D0%BE%D0%BD%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-2476e45d58d9" }],
+    [{ "text": "Матовая", "callback_data": "6_3","url":"https://medium.com/@savenko136t/%D0%BE%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B0-%D0%BC%D0%B0%D1%82%D0%BE%D0%B2%D0%BE%D0%B9-%D0%BF%D0%BB%D0%B5%D0%BD%D0%BA%D0%BE%D0%B9-10beb605b7a4" }],
+    [{ "text": "Хром/Золото", "callback_data": "6_3","url":"https://medium.com/@savenko136t/%D0%BE%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B0-%D0%B3%D0%BB%D1%8F%D0%BD%D1%86%D0%B5%D0%B2%D0%BE%D0%B9-%D0%BF%D0%BB%D0%B5%D0%BD%D0%BA%D0%BE%D0%B9-344c83505c57" }],
+    [{ "text": "Винилография", "callback_data": "6_3" ,"url":"https://medium.com/@savenko136t/%D0%BE%D0%BA%D0%BB%D0%B5%D0%B9%D0%BA%D0%B0-%D1%85%D1%80%D0%BE%D0%BC-%D0%B7%D0%BE%D0%BB%D0%BE%D1%82%D0%BE-a741b79bcf96"}],
+    [{ "text": "Камуфляж", "callback_data": "6_3","url":"https://medium.com/@savenko136t/%D0%B2%D0%B8%D0%BD%D0%B8%D0%BB%D0%BE%D0%B3%D1%80%D0%B0%D1%84%D0%B8%D1%8F-e11d2e2d59c7" }],
+    [{ "text": "Брендирование", "callback_data": "6_3","url":"https://medium.com/@savenko136t/%D0%BA%D0%B0%D0%BC%D1%83%D1%84%D0%BB%D1%8F%D0%B6-%D0%B3%D0%B5%D0%BE%D0%BC%D0%B5%D1%82%D1%80%D0%B8%D1%8F-d64ce3d2ab8a" }],
+    [{ "text": "Глянцевая", "callback_data": "5_back","url":"https://medium.com/@savenko136t/%D0%B1%D1%80%D0%B5%D0%BD%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-39283b6f85d2" }]]
   })
 };
 

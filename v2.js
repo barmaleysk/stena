@@ -11,12 +11,7 @@ const tg = new Telegram.Telegram(data.token, { workers: 1 })
 
 class OtherwiseController extends TelegramBaseController {
     handle($) {
-        if (!$._message._photo && !$._message._forwardFrom) {
-            lib.text_input($._message,
-                (result) => { $.sendMessage(result.text, result.opt); tg.api.forwardMessage(data.chat, $.chatId, $.message.messageId) },
-                (result) => { $.sendMessage(result.text, result.opt) }
-            )
-        }
+
         if ($._message._photo) {//<-----------
             console.log($._message._photo)
             
@@ -102,10 +97,6 @@ class RefController extends TelegramBaseController {
     }
     get routes() { return { 'ref_com': 'refFun' } }
 }
-class SetController extends TelegramBaseController {
-    setFun($) { analytic.add('Настройка рассылки', $); lib.setcom($, (r) => { $.sendMessage(r.text, r.opt) }) }
-    get routes() { return { 'set_com': 'setFun' } }
-}
 class SaleController extends TelegramBaseController {
     saleFun($) {
         analytic.add('Премиум скидки', $);
@@ -130,7 +121,7 @@ class SaleController extends TelegramBaseController {
 class Company extends TelegramBaseController {
     qCompany($) { 
         //analytic.add('О компании', $); 
-        $.sendMessage(data.company)
+        $.sendMessage(data.company,{url:'https://medium.com/@savenko136t/%D0%BE%D1%82%D0%B2%D0%B5%D1%87%D0%B0%D0%B5%D0%BC-%D0%BD%D0%B0-%D0%B2%D0%B0%D1%88%D0%B8-%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-4a7f75123486'}
     }
     get routes() { return { 'company': 'qCompany' } }
 }

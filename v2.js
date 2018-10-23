@@ -117,11 +117,17 @@ class SaleController extends TelegramBaseController {
     }
     get routes() { return { 'sale_com': 'saleFun' } }
 }
-
+class Qwest extends TelegramBaseController {
+    qQwest($) { 
+        //analytic.add('О компании', $); 
+        $.sendMessage('https://medium.com/@savenko136t/%D0%BE%D1%82%D0%B2%D0%B5%D1%87%D0%B0%D0%B5%D0%BC-%D0%BD%D0%B0-%D0%B2%D0%B0%D1%88%D0%B8-%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-4a7f75123486')
+    }
+    get routes() { return { 'qwest': 'qQwest' } }
+}
 class Company extends TelegramBaseController {
     qCompany($) { 
         //analytic.add('О компании', $); 
-        $.sendMessage('https://medium.com/@savenko136t/%D0%BE%D1%82%D0%B2%D0%B5%D1%87%D0%B0%D0%B5%D0%BC-%D0%BD%D0%B0-%D0%B2%D0%B0%D1%88%D0%B8-%D0%B2%D0%BE%D0%BF%D1%80%D0%BE%D1%81%D1%8B-4a7f75123486')
+        $.sendMessage('https://medium.com/@savenko136t/%D0%B4%D0%BB%D1%8F-%D1%86%D0%B5%D0%BD%D0%B8%D1%82%D0%B5%D0%BB%D0%B5%D0%B9-%D0%BE%D1%80%D0%B8%D0%B3%D0%B8%D0%BD%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%81%D1%82%D0%B8-24dd3eab2b65')
     }
     get routes() { return { 'company': 'qCompany' } }
 }
@@ -153,7 +159,7 @@ tg.router
     .when(new TextCommand('О компании', 'company'), new Company())
     .when(new TextCommand('Варианты оклейки', 'varCl'), new VarCl())
     .when(new TextCommand('Процесс оклейки', 'procCl'), new ProcCl())
-    .when(new TextCommand('Отвечаем на вопросы', 'startCommand'), new StartController())
+    .when(new TextCommand('Отвечаем на вопросы', 'qwest'), new Qwest())
     .when(new TextCommand('Бесплатная консультация', 'startCommand'), new StartController())
     .when(new TextCommand('Контакты', 'contact'), new Contact())
     .when(new TextCommand('Оставить заявку', 'startCommand'), new StartController())
